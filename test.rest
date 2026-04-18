@@ -1,0 +1,25 @@
+POST http://localhost:8000/api/create
+Content-Type: application/json
+
+{
+    "book_id":202,
+    "book_name":"machine Learning"
+}
+
+
+###
+
+PUT http://localhost:8000/api/update/202
+Content-Type: application/json
+
+{
+    "book_name":"hello world"
+}
+
+### 
+
+DELETE http://localhost:8000/api/delete/202
+
+###
+
+GET http://10.94.54.92:8000/api/showdata

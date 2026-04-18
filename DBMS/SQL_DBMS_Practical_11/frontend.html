@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="p-10">
+    <div class="flex gap-8">
+        <div class="flex flex-col gap-[8vh] p-5 w-[60%] h-[90vh] border border-gray-300 rounded-2xl">
+            <div
+                class="p-5 border border-gray-200 rounded-xl space-y-5 shadow-md hover:shadow-xl transition-all duration-500">
+                <h1 class="text-2xl font-medium">Enter the details to add new book into database</h1>
+                <div class="flex gap-8 px-5 item-center ">
+                    <p class="mt-1 font-medium">Add Book ID : </p><input
+                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                        placeholder="enter book id" id="bid">
+                    <p class="mt-1 font-medium">Add Book Name : </p><input
+                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                        placeholder="enter book name" id="bname">
+                </div>
+                <button id="pd"
+                    class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Post
+                    Data</button>
+            </div>
+
+            <div
+                class="p-5 border border-gray-200 rounded-xl space-y-5  shadow-md hover:shadow-xl transition-all duration-500">
+                <h1 class="text-2xl font-medium">Enter the book id to delete book from database</h1>
+                <div class="flex gap-3 px-5 ">
+                    <p class="mt-1 font-medium">Book ID : </p><input
+                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                        placeholder="enter book id to delete" id="bd_id">
+                </div>
+                <button id="dd"
+                    class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Delete
+                    Data</button>
+            </div>
+
+            <div
+                class="p-5 border border-gray-200 rounded-xl space-y-5  shadow-md hover:shadow-xl transition-all duration-500">
+                <h1 class="text-2xl font-medium">Enter the book details to update book name in database</h1>
+                <div class="flex gap-3 px-5 ">
+                    <p class="mt-1 font-medium">Update Book ID : </p><input
+                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                        placeholder="enter book id to update name" id="bu_id">
+                    <p class="mt-1 font-medium">Update Book Name : </p><input
+                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                        placeholder="enter book name to update name" id="bu_name">
+                </div>
+                <button id="ud"
+                    class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">update
+                    data</button>
+            </div>
+
+
+        </div>
+        <div class="w-[40%] border border-gray-300 rounded-2xl p-5">
+
+            <button id="gd"
+                class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Refresh
+                data</button>
+
+            <div id="table"
+                class="text-xl font-medium flex flex-col gap-5 mt-5 border-t border-gray-400 px-2 py-5 max-h-[7vh] overflow-y-auto">
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        const getbtn = document.getElementById("gd");
+        const tablebtn = document.getElementById("table");
+        const postbtn = document.getElementById('pd');
+        const bname = document.getElementById('bname');
+        const bid = document.getElementById("bid");
+        const bd_id = document.getElementById("bd_id");
+        const deletebtn = document.getElementById("dd");
+        const bu_name = document.getElementById("bu_name");
+        const bu_id = document.getElementById("bu_id");
+        const updatebtn = document.getElementById("ud");
+
+        const getData = async () => {
+            try {
+                const response = await fetch("http://localhost:8000/api/showdata");
+                if (!response.ok) throw new Error("Network response was not ok");
+
+                const data = await response.json();
+
+                let htmlContent = "";
+
+                data.result.map((item) => (
+                    htmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">Book Id : ${item.BOOK_ID} <br> Book Name : ${item.BOOK_NAME}</p>`
+                ));
+
+                tablebtn.innerHTML = htmlContent;
+
+                console.log(data.result)
+            } catch (error) {
+                console.log(error)
+                tablebtn.innerHTML = `<p>error : ${JSON.stringify(error)}</p>`
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log("Page refreshed - fetching data...");
+            getData();
+        });
+
+
+        getbtn.addEventListener("click", getData);
+
+        const createData = async () => {
+
+            const newBook = {
+                book_id: bid.value,
+                book_name: bname.value
+            };
+
+            const response = await fetch("http://localhost:8000/api/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newBook)
+            });
+
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const data = await response.json();
+
+            console.log(data.message);
+        }
+
+        postbtn.addEventListener("click", createData);
+
+
+        const deleteData = async () => {
+            const id = bd_id.value;
+            console.log(id)
+            const response = await fetch(`http://localhost:8000/api/delete/${id}`, {
+                method: "DELETE"
+            });
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const data = await response.json();
+
+            console.log(JSON.stringify(data.message));
+        }
+
+        deletebtn.addEventListener("click", deleteData);
+
+
+        const UpdateData = async () => {
+            const id = bu_id.value;
+            const newName = {
+                book_name: bu_name.value
+            }
+
+
+            const response = await fetch(`http://localhost:8000/api/update/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newName)
+            });
+
+            const data = await response.json();
+            console.log(data.message);
+        }
+
+
+        updatebtn.addEventListener("click", UpdateData);
+
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
