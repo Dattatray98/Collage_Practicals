@@ -17,7 +17,7 @@ SELECT MAX(IssueCount) FROM (
     SELECT COUNT(*) AS IssueCount 
     FROM Issue_Record 
     GROUP BY Student_ID
-) AS StudentIssues;
+) StudentIssues;
 
 -- 4. Correlated Subquery
 -- Find students who have issued a specific book (e.g., Book_ID 1)
