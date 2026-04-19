@@ -23,3 +23,26 @@ export const ShowData = async (req: Request, res: Response) => {
         console.log(error);
     }
 }
+
+
+
+export const ShowUserData = async (req:Request, res:Response)=>{
+    let connection;
+    try{
+        connection = await ConnectDB();
+
+        const userSQL = `SELECT * FROM Users`;
+
+        const result = await connection.execute(userSQL, [], {outFormat:OracleDB.OUT_FORMAT_OBJECT});
+
+        res.status(201).json({
+            result:result.rows
+        })
+    }catch(error){
+        console.error(error);
+    }finally{
+        if(connection){
+            connection.close();
+        }
+    }
+}

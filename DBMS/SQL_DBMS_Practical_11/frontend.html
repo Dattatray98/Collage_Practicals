@@ -58,13 +58,18 @@
 
         </div>
         <div class="w-[40%] border border-gray-300 rounded-2xl p-5">
+            <div class="w-full border border-gray-300 flex gap-5">
+                <button id="gd"
+                    class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Refresh
+                    data</button>
+                    <div id="stats" class="flex-1 flex items-center px-2 border-2 border-green-500">
 
-            <button id="gd"
-                class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Refresh
-                data</button>
+                    </div>
+
+            </div>
 
             <div id="table"
-                class="text-xl font-medium flex flex-col gap-5 mt-5 border-t border-gray-400 px-2 py-5 max-h-[7vh] overflow-y-auto">
+                class="text-xl font-medium flex flex-col gap-5 mt-5 border-t border-gray-400 px-2 py-5 max-h-[78vh] overflow-y-auto">
             </div>
         </div>
     </div>
@@ -83,6 +88,7 @@
         const bu_name = document.getElementById("bu_name");
         const bu_id = document.getElementById("bu_id");
         const updatebtn = document.getElementById("ud");
+        const stats = document.getElementById("stats");
 
         const getData = async () => {
             try {
@@ -96,6 +102,8 @@
                 data.result.map((item) => (
                     htmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">Book Id : ${item.BOOK_ID} <br> Book Name : ${item.BOOK_NAME}</p>`
                 ));
+
+                stats.innerHTML = `<p>Total books : ${data.result.length}</p>`
 
                 tablebtn.innerHTML = htmlContent;
 

@@ -22,4 +22,19 @@ DELETE http://localhost:8000/api/delete/202
 
 ###
 
-GET http://10.94.54.92:8000/api/showdata
+GET http://localhost:8000/api/showdata
+
+###
+
+POST http://localhost:8000/api/borow
+Content-Type: application/json
+
+{
+    "name":"i am",
+    "email":"thss@gmail.com",
+    "book_id":204
+}
+
+###
+
+GET http://localhost:8000/api/showUser

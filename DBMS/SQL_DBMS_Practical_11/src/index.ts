@@ -5,6 +5,7 @@ import createTable from "./routes/createTable";
 import update from "./routes/update";
 import Delete from "./routes/deleteData";
 import Showdata from "./routes/showData";
+import borowbook from "./routes/borow";
 
 const app = express()
 
@@ -22,6 +23,6 @@ app.use("/api", createTable);
 app.use("/api", update);
 app.use("/api", Delete); 
 app.use("/api", Showdata);
-
+app.use("/api", borowbook);
 
 app.listen(PORT, () => console.log("server started at http://localhost:8000"))
