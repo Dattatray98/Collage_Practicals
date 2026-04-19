@@ -42,7 +42,7 @@ CREATE TABLE Issue_Record (
 ALTER TABLE Student ADD Phone_Number VARCHAR2(15);
 
 -- 3. Insert Data
-INSERT INTO Student VALUES (2, 'Jojewar Dattatray', 'CS', 'jojewardattatray@gmail.com', '1234567890');
+INSERT INTO Student VALUES (1, 'adake vedant', 'CS', 'adakevedant18@gmail.com', '1234567890');
 INSERT INTO Author VALUES (2, 'vedant');
 INSERT INTO Publisher VALUES (2, 'Penguin');
 INSERT INTO Book VALUES (2, 'GOT', 1, 1, 5);

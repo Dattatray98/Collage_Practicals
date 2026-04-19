@@ -2,7 +2,7 @@
 
 -- 1. Data Manipulation Language (DML)
 UPDATE Student 
-SET Email = 'p_patil_new@gmail.com' 
+SET Email = 'vedant_new@gmail.com' 
 WHERE Student_ID = 1;
 
 UPDATE Book 

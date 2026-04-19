@@ -3,8 +3,8 @@
 
 // 1. CREATE (Insert)
 db.students.insertMany([
-    { student_id: 1, name: "Pushpraj Patil", dept: "CS", email: "pushpa@gmail.com", age: 20 },
-    { student_id: 2, name: "Tejaswini Lagad", dept: "IT", email: "teju@gmail.com", age: 21 },
+    { student_id: 1, name: "adake vedant", dept: "CS", email: "adakevedant18@gmail.com", age: 20 },
+    { student_id: 2, name: "dattatray jojewar", dept: "IT", email: "jojewardattatray@gmail.com", age: 21 },
     { student_id: 3, name: "Amit Sharma", dept: "CS", email: "amit@gmail.com", age: 22 }
 ]);
 
@@ -19,7 +19,7 @@ db.students.insertMany([
 // Update email for student_id 1
 db.students.updateOne(
     { student_id: 1 },
-    { $set: { email: "p_patil_new@gmail.com" } }
+    { $set: { email: "vedant_new@gmail.com" } }
 );
 
 // Increment age for all CS students
