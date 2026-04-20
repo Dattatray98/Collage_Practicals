@@ -1,42 +1,42 @@
-# ER Diagram for Library Management System
+```
+Table Student {
+  Student_ID int [pk] // Primary Key
+  Name varchar(50) [not null]
+  Department varchar(50)
+  Email varchar(100) [unique]
+}
 
-```mermaid
-erDiagram
-    STUDENT ||--o{ ISSUE_RECORD : "borrows"
-    BOOK ||--o{ ISSUE_RECORD : "is issued"
-    AUTHOR ||--o{ BOOK : "writes"
-    PUBLISHER ||--o{ BOOK : "publishes"
+Table Author {
+  Author_ID int [pk]
+  Author_Name varchar(50) [not null]
+}
 
-    STUDENT {
-        int student_id PK
-        string name
-        string department
-        string email
-    }
+Table Publisher {
+  Publisher_ID int [pk]
+  Publisher_Name varchar(50) [not null]
+}
 
-    AUTHOR {
-        int author_id PK
-        string author_name
-    }
+Table Book {
+  Book_ID int [pk]
+  Title varchar(100) [not null]
+  Author_ID int
+  Publisher_ID int
+  Quantity int [note: '>= 0']
+}
 
-    PUBLISHER {
-        int publisher_id PK
-        string publisher_name
-    }
+Table Issue_Record {
+  Issue_ID int [pk]
+  Student_ID int
+  Book_ID int
+  Issue_Date date
+  Return_Date date
+}
 
-    BOOK {
-        int book_id PK
-        string title
-        int author_id FK
-        int publisher_id FK
-        int quantity
-    }
+-- Relationships
 
-    ISSUE_RECORD {
-        int issue_id PK
-        int student_id FK
-        int book_id FK
-        date issue_date
-        date return_date
-    }
+Ref: Book.Author_ID > Author.Author_ID // ON DELETE SET NULL
+Ref: Book.Publisher_ID > Publisher.Publisher_ID // ON DELETE SET NULL
+
+Ref: Issue_Record.Student_ID > Student.Student_ID // ON DELETE CASCADE
+Ref: Issue_Record.Book_ID > Book.Book_ID // ON DELETE CASCADE
 ```

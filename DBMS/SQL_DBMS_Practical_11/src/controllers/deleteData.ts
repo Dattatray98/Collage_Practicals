@@ -11,13 +11,18 @@ export const DeleteData = async (req: Request, res: Response) => {
         connection = await ConnectDB();
 
         const DeleteSQL = `DELETE FROM books WHERE book_id = :id`;
+        const DeleteChild = `DELETE FROM Users WHERE book_id = :id`;
 
-        const result: any = await connection.execute(DeleteSQL, { id }, { autoCommit: true });
+        const success = await connection.execute(DeleteChild, { id }, { autoCommit: true });
+
+        if (success) {
+            const result: any = await connection.execute(DeleteSQL, { id }, { autoCommit: true });
+        }
 
         res.status(201).json({
             message: "deleted user"
         });
-        
+
     } catch (error) {
         console.log(error)
     } finally {
