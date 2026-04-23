@@ -1,5 +1,5 @@
 // Create / Use database
-use collegeDB
+// use collegeDB
 
 // Insert data
 db.students.insertMany([

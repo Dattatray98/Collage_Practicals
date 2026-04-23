@@ -30,9 +30,9 @@ POST http://localhost:8000/api/borow
 Content-Type: application/json
 
 {
-    "name":"i am",
-    "email":"thss@gmail.com",
-    "book_id":202
+    "name":"datta",
+    "email":"jojewar@gmail.com",
+    "book_id":301
 }
 
 ###

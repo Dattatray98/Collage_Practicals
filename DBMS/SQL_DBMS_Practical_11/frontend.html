@@ -7,19 +7,26 @@
     <title>Document</title>
 </head>
 
-<body class="p-10">
+<body class="px-10 py-4">
     <div class="flex gap-8">
-        <div class="flex flex-col gap-[8vh] p-5 w-[60%] h-[90vh] border border-gray-300 rounded-2xl">
+        <div
+            class="flex flex-col gap-5 px-2 py-5 w-[60%] max-h-[96vh] overflow-y-auto border border-gray-300 rounded-2xl">
+
             <div
                 class="p-5 border border-gray-200 rounded-xl space-y-5 shadow-md hover:shadow-xl transition-all duration-500">
                 <h1 class="text-2xl font-medium">Enter the details to add new book into database</h1>
                 <div class="flex gap-8 px-5 item-center ">
-                    <p class="mt-1 font-medium">Add Book ID : </p><input
-                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
-                        placeholder="enter book id" id="bid">
-                    <p class="mt-1 font-medium">Add Book Name : </p><input
-                        class="px-2 py-1 outline-none rounded-md border border-black" type="text"
-                        placeholder="enter book name" id="bname">
+                    <div class="flex gap-4">
+                        <p class="mt-1 font-medium">Add Book ID : </p><input
+                            class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                            placeholder="enter book id" id="bid">
+                    </div>
+
+                    <div class="flex gap-4">
+                        <p class="mt-1 font-medium">Add Book Name : </p><input
+                            class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                            placeholder="enter book name" id="bname">
+                    </div>
                 </div>
                 <button id="pd"
                     class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Post
@@ -32,7 +39,7 @@
                 <div class="flex gap-3 px-5 ">
                     <p class="mt-1 font-medium">Book ID : </p><input
                         class="px-2 py-1 outline-none rounded-md border border-black" type="text"
-                        placeholder="enter book id to delete" id="bd_id">
+                        placeholder="enter book id" id="bd_id">
                 </div>
                 <button id="dd"
                     class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Delete
@@ -45,31 +52,62 @@
                 <div class="flex gap-3 px-5 ">
                     <p class="mt-1 font-medium">Update Book ID : </p><input
                         class="px-2 py-1 outline-none rounded-md border border-black" type="text"
-                        placeholder="enter book id to update name" id="bu_id">
+                        placeholder="enter book id" id="bu_id">
                     <p class="mt-1 font-medium">Update Book Name : </p><input
                         class="px-2 py-1 outline-none rounded-md border border-black" type="text"
-                        placeholder="enter book name to update name" id="bu_name">
+                        placeholder="enter book name" id="bu_name">
                 </div>
                 <button id="ud"
                     class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">update
                     data</button>
             </div>
+            <div
+                class="p-5 border border-gray-200 rounded-xl space-y-5  shadow-md hover:shadow-xl transition-all duration-500">
+                <h1 class="text-2xl font-medium">Issue a book</h1>
+                <div class="flex flex-wrap gap-8 px-5 ">
+                    <div class="flex gap-4">
+                        <p class="mt-1 font-medium">User Name : </p><input
+                            class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                            placeholder="enter user name" id="un">
+                    </div>
+
+                    <div class="flex gap-4">
+                        <p class="mt-1 font-medium">User Email : </p><input
+                            class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                            placeholder="enter user email" id="ue">
+                    </div>
+
+                    <div class="flex gap-4">
+                        <p class="mt-1 font-medium">Book Id : </p><input
+                            class="px-2 py-1 outline-none rounded-md border border-black" type="text"
+                            placeholder="enter book Id" id="ub">
+                    </div>
+                </div>
+                <button id="ise"
+                    class="ml-5 border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Issue
+                    book</button>
+            </div>
 
 
         </div>
         <div class="w-[40%] border border-gray-300 rounded-2xl p-5">
-            <div class="w-full border border-gray-300 flex gap-5">
+            <div class="w-full flex gap-5">
                 <button id="gd"
                     class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Refresh
                     data</button>
-                    <div id="stats" class="flex-1 flex items-center px-2 border-2 border-green-500">
+                
+                    <button id="gUd"  class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Show User data</button>
+                <div id="stats" class="flex-1 flex items-center px-2">
 
-                    </div>
+                </div>
 
             </div>
+            <div class=" flex flex-col max-h-[80vh] space-y-5">
+                <div id="table"
+                    class="text-xl font-medium flex flex-col gap-5 mt-5 border-t border-gray-400 px-2 py-5 max-h-[30%] overflow-y-auto">
 
-            <div id="table"
-                class="text-xl font-medium flex flex-col gap-5 mt-5 border-t border-gray-400 px-2 py-5 max-h-[78vh] overflow-y-auto">
+                </div>
+                
             </div>
         </div>
     </div>
@@ -80,6 +118,8 @@
 
         const getbtn = document.getElementById("gd");
         const tablebtn = document.getElementById("table");
+        const usertbl = document.getElementById("user-table");
+        const Userdatabtn = document.getElementById("gUd");
         const postbtn = document.getElementById('pd');
         const bname = document.getElementById('bname');
         const bid = document.getElementById("bid");
@@ -89,23 +129,43 @@
         const bu_id = document.getElementById("bu_id");
         const updatebtn = document.getElementById("ud");
         const stats = document.getElementById("stats");
+        const user_name = document.getElementById("un");
+        const user_email = document.getElementById("ue");
+        const user_book = document.getElementById("ub");
+        const issuebtn = document.getElementById("ise");
 
         const getData = async () => {
             try {
                 const response = await fetch("http://localhost:8000/api/showdata");
                 if (!response.ok) throw new Error("Network response was not ok");
 
+                const Userresponse = await fetch("http://localhost:8000/api/showUser");
+                if (!Userresponse.ok) throw new Error("Network user response was not ok");
+
                 const data = await response.json();
 
+                const UserData = await Userresponse.json();
+
                 let htmlContent = "";
+
+                let UserHtmlContent = "";
 
                 data.result.map((item) => (
                     htmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">Book Id : ${item.BOOK_ID} <br> Book Name : ${item.BOOK_NAME}</p>`
                 ));
 
+                UserData.result.map((item)=>(
+                    UserHtmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">User Name : ${item.NAME} <br> User Email : ${item.EMAIL} <br> Issued Book Id : ${item.BOOK_ID}</p>`
+                ))
+
                 stats.innerHTML = `<p>Total books : ${data.result.length}</p>`
 
                 tablebtn.innerHTML = htmlContent;
+
+                Userdatabtn.addEventListener("click", ()=>{
+                    tablebtn.innerHTML = UserHtmlContent
+                })
+
 
                 console.log(data.result)
             } catch (error) {
@@ -169,7 +229,6 @@
                 book_name: bu_name.value
             }
 
-
             const response = await fetch(`http://localhost:8000/api/update/${id}`, {
                 method: "PUT",
                 headers: {
@@ -182,8 +241,29 @@
             console.log(data.message);
         }
 
-
         updatebtn.addEventListener("click", UpdateData);
+
+
+        const BorrowBook = async () => {
+            borrowData = {
+                "name": user_name.value,
+                "email": user_email.value,
+                "book_id": user_book.value
+            }
+
+            const response = await fetch(`http://localhost:8000/api/borow`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(borrowData)
+            });
+
+            const data = await response.json();
+            console.log(data.message);
+        }
+
+        issuebtn.addEventListener("click", BorrowBook);
 
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
