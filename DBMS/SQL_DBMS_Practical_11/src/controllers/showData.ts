@@ -12,7 +12,6 @@ export const ShowData = async (req: Request, res: Response) => {
         const showSQL = `SELECT * from books`;
 
         const result = await connection.execute(showSQL, [], { outFormat: OracleDB.OUT_FORMAT_OBJECT });
-        console.log(result.rows);
 
         res.status(201).json({
             message: "success",

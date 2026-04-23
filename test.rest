@@ -32,9 +32,20 @@ Content-Type: application/json
 {
     "name":"datta",
     "email":"jojewar@gmail.com",
-    "book_id":301
+    "book_id":"B001"
 }
 
 ###
 
 GET http://localhost:8000/api/showUser
+
+
+### 
+POST http://localhost:8000/api/return
+Content-Type: application/json
+
+{
+    "book_id":"B001",
+    "user_id":9,
+    "user_name":"dattu"
+}
