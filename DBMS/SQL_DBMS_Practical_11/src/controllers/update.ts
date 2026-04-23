@@ -10,7 +10,7 @@ export const UpdateData = async (req: Request, res: Response) => {
     try {
         connection = await ConnectDB();
 
-        const updatedata = `UPDATE books SET book_name = :book_name WHERE book_id = :id`;
+        const updatedata = `UPDATE Books SET book_name = :book_name WHERE book_id = :id`;
 
         const result = await connection.execute(updatedata, {book_name, id}, {autoCommit:true})
 

@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { returnBook } from "../controllers/return";
+import { History, returnBook } from "../controllers/return";
 
 const router = Router();
 
 
 router.post("/return", returnBook);
+router.get("/history", History);
 
 export default router;

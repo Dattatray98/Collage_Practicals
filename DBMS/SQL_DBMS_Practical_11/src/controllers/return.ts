@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import ConnectDB from "../config/db";
+import { autoCommit, OUT_FORMAT_OBJECT } from "oracledb";
 
 
 export const returnBook = async (req: Request, res: Response) => {
@@ -20,8 +21,32 @@ export const returnBook = async (req: Request, res: Response) => {
         await connection.commit();
 
         return res.status(201).json({
-            message:"success"
+            message: "success"
         })
+
+    } catch (error) {
+        console.log(error);
+    } finally {
+        if (connection) {
+            connection.close();
+        }
+    }
+}
+
+
+export const History = async (req: Request, res: Response) => {
+    let connection;
+    try {
+
+        connection = await ConnectDB();
+
+        const sQl = `SELECT * FROM History`;
+
+        const result = await connection.execute(sQl, [], { autoCommit: true, outFormat: OUT_FORMAT_OBJECT });
+
+        return res.status(201).json({
+            result: result.rows
+        });
 
     } catch (error) {
         console.log(error);

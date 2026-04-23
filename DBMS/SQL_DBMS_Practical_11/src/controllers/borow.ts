@@ -10,9 +10,10 @@ export const BorowBook = async (req:Request, res:Response)=>{
 
         const borowSQL = `INSERT INTO Users(name, email, book_id) VALUES (:name, :email, :book_id)`;
         const BookSQL =  `UPDATE Books SET is_borrowed = 1 WHERE book_id = :book_id`;
+        
 
         const result = await connection.execute(borowSQL, {name, email, book_id}, {autoCommit:true, outFormat:OracleDB.OUT_FORMAT_OBJECT});
-
+    
         await connection.execute(BookSQL, {book_id}, {autoCommit:true});
 
         console.log(result);

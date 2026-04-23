@@ -125,8 +125,11 @@
                     data</button>
 
                 <button id="gUd"
-                    class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">Show
-                    User data</button>
+                    class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">User data</button>
+
+                <button id="ghis" class="border border-gray-400 px-5 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 font-medium">
+                    History
+                </button>
                 <div id="stats" class="flex-1 flex items-center px-2">
 
                 </div>
@@ -166,6 +169,7 @@
         const returnUserId = document.getElementById("rui");
         const returnbookId = document.getElementById("rub");
         const returnBtn = document.getElementById("returnbtn")
+        const historybtn = document.getElementById("ghis");
 
         const getData = async () => {
             try {
@@ -175,14 +179,20 @@
                 const Userresponse = await fetch("http://localhost:8000/api/showUser");
                 if (!Userresponse.ok) throw new Error("Network user response was not ok");
 
+                const HistoryResponse = await fetch("http://localhost:8000/api/history");
+                if (!Userresponse.ok) throw new Error("Network user response was not ok");
+
                 const data = await response.json();
 
                 const UserData = await Userresponse.json();
 
+                const HistoryData = await HistoryResponse.json();
+
                 let htmlContent = "";
 
                 let UserHtmlContent = "";
-                let boorrowedcontent = "";
+
+                let historyHtmlContent = "";
 
 
                 data.result.map((item) => {
@@ -195,8 +205,12 @@
                 );
 
                 UserData.result.map((item) => (
-                    UserHtmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">User Name : ${item.NAME} <br> User Email : ${item.EMAIL} <br> Issued Book Id : ${item.BOOK_ID}</p>`
+                    UserHtmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">User Id : ${item.ID} <br> User Name : ${item.NAME} <br> User Email : ${item.EMAIL} <br> Issued Book Id : ${item.BOOK_ID}</p>`
                 ))
+
+                HistoryData.result.map((item)=>(
+                    historyHtmlContent += `<p class="border border-gray-200 shadow-md p-4 rounded-2xl">User Name : ${item.NAME} <br> User Id : ${item.USER_ID} <br> Issued Book Id : ${item.BOOK_ID}</p>`
+                ));
 
                 stats.innerHTML = `<p>Total books : ${data.result.length}</p>`
 
@@ -206,6 +220,9 @@
                     tablebtn.innerHTML = UserHtmlContent
                 })
 
+                historybtn.addEventListener("click", ()=>{
+                    tablebtn.innerHTML = historyHtmlContent;
+                })
 
                 console.log(data.result)
             } catch (error) {
@@ -242,6 +259,7 @@
             const data = await response.json();
             if(data){
                 alert("book added!");
+                window.location.reload();
             }
 
             console.log(data.message);
@@ -260,7 +278,8 @@
 
             const data = await response.json();
             if(data){
-                alert("book removed")
+                alert("book removed");
+                window.location.reload();
             }
 
             console.log(JSON.stringify(data.message));
@@ -286,6 +305,7 @@
             const data = await response.json();
             if(data){
                 alert("book data updated");
+                window.location.reload();
             }
             console.log(data.message);
         }
@@ -295,9 +315,9 @@
 
         const BorrowBook = async () => {
             const borrowData = {
-                "name": user_name.value,
-                "email": user_email.value,
-                "book_id": user_book.value
+                name: user_name.value,
+                email: user_email.value,
+                book_id: user_book.value
             }
 
             const response = await fetch(`http://localhost:8000/api/borow`, {
@@ -310,7 +330,8 @@
 
             const data = await response.json();
             if(data){
-                alert("book borrowed")
+                alert("book borrowed");
+                window.location.reload();
             }
             console.log(data.message);
         }
@@ -320,9 +341,9 @@
 
         const ReturnBook = async () => {
             const ReturnData = {
-                "book_id": returnbookId.value,
-                "user_id": returnUserId.value,
-                "user_name": returnUserName.value
+                book_id: returnbookId.value,
+                user_id: returnUserId.value,
+                user_name: returnUserName.value
             }
 
             const response = await fetch('http://localhost:8000/api/return', {
@@ -336,6 +357,7 @@
             const data = await response.json();
             if(data){
                 alert("Book returned")
+                window.location.reload();
             }
         }
 
