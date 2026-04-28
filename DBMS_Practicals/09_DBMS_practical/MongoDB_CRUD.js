@@ -6,14 +6,14 @@ db.students.insertMany([
     { student_id: 1, name: "adake vedant", dept: "CS", email: "adakevedant18@gmail.com", age: 20 },
     { student_id: 2, name: "dattatray jojewar", dept: "IT", email: "jojewardattatray@gmail.com", age: 21 },
     { student_id: 3, name: "Amit Sharma", dept: "CS", email: "amit@gmail.com", age: 22 }
-]);
+]);4
 
 // 2. READ (Find)
 // Find all students in CS department
-// db.students.find({ dept: "CS" });
+db.students.find({ dept: "CS" });
 
 // Find students with age > 20 using logical operator
-// db.students.find({ age: { $gt: 20 } });
+db.students.find({ age: { $gt: 20 } });
 
 // 3. UPDATE
 // Update email for student_id 1
@@ -33,5 +33,5 @@ db.students.updateMany(
 db.students.deleteOne({ student_id: 3 });
 
 // 5. Save method (Alternative for insert/update)
-// db.students.save({ student_id: 4, name: "New Student", dept: "Mech" }); 
+db.students.save({ student_id: 4, name: "New Student", dept: "Mech" }); 
 // Note: save() is deprecated in newer mongo shells in favor of insertOne/replaceOne
